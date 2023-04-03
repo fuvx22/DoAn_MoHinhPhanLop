@@ -39,7 +39,7 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 
 	@Override
-	public readers selectByCondition(String con) {
+	public ArrayList<readers> selectByCondition(String con) {
 		// TODO Auto-generated method stub
 		return null;
 	}

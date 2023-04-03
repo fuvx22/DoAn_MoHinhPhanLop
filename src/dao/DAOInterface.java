@@ -14,6 +14,6 @@ public interface DAOInterface<T> {
 	
 	public ArrayList<T> getAll();
 
-	public T selectByCondition(String con);
+	public ArrayList<T> selectByCondition(String condition);
 	
 }

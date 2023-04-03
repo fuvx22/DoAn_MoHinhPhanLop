@@ -111,7 +111,7 @@ public class DAObooks implements DAOInterface<books>{
 	}
 
 	@Override
-	public books selectByCondition(String con) {
+	public ArrayList<books> selectByCondition(String con) {
 		// TODO Auto-generated method stub
 		return null;
 	}
