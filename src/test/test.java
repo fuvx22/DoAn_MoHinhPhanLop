@@ -11,9 +11,9 @@ import model.books;
 public class test {
 	public static void main(String[] args) {
 		
-		books book1 = new books("Java","John St", new Date(0), 20);
+		books book1 = new books("How to become rich 2","Michel Nguyen", new Date(0), 30);
 		books book2 = new books("Python","Kenrick Jr", new Date(1), 15);
-		books book3 = new books(13,"C#","Harry Kane", new Date(1), 30);
+		books book3 = new books(22,"C#","Harry Kane", new Date(1), 30);
 		
 		//test insert
 		
@@ -26,12 +26,16 @@ public class test {
 		
 		//test delete
 		
-		for (int i = 1; i < 6 ;i++) {
-			books sach = new books();
-			sach.setBook_id(i);
-			DAObooks.getInstance().delete(sach);
-		}
+//		for (int i = 1; i < 6  ;i++) {
+//			books sach = new books();
+//			sach.setBook_id(i);
+//			DAObooks.getInstance().delete(book3);
+//		}
 		
+//		DAObooks.getInstance().getAll();
+		
+//		String result = DAObooks.getInstance().selectById(14).toString();
+//		System.out.println(result);
 		
 ;	}
 }

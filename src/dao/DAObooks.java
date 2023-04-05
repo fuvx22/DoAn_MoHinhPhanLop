@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import database.JDBC_Util;
 import model.books;
 
 public class DAObooks implements DAOInterface<books>{
+	
+	ArrayList<books> ketQua = new ArrayList<>();
 	
 	public static DAObooks getInstance() {
 		return new DAObooks();
@@ -20,17 +24,20 @@ public class DAObooks implements DAOInterface<books>{
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
-			Statement st = con.createStatement();
-			
 			String sql = "INSERT INTO books (book_name, author, release_date, quantity, borrow_quantity) "+
-						 "VALUES ('"+t.getName()+"', '"+t.getAuthor()+"', '"+t.getRelease_date()+"', "+t.getQuantity()+", "+t.getBrr_quantity()+")";
-		
+						 "VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, t.getName());
+			st.setString(2, t.getAuthor());
+			st.setDate(3, t.getRelease_date());
+			st.setInt(4, t.getQuantity());
+			st.setInt(5, t.getBrr_quantity());
 			
-			int ketQua = st.executeUpdate(sql);
-			
-			System.out.println("Ban da thuc thi: "+sql);
-			System.out.println("Co "+ketQua+" dong bi thay doi!");		
-			
+//			String sql = "INSERT INTO books (book_name, author, release_date, quantity, borrow_quantity) "+
+//						 "VALUES ('"+t.getName()+"', '"+t.getAuthor()+"', '"+t.getRelease_date()+"', "+t.getQuantity()+", "+t.getBrr_quantity()+")";
+				
+			st.executeUpdate();
+					
 			JDBC_Util.closeConnection(con);
 			
 		} catch (SQLException e) {
@@ -46,21 +53,25 @@ public class DAObooks implements DAOInterface<books>{
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
-			Statement st = con.createStatement();
 			
 			String sql = "UPDATE books "+
 						 " SET "+
-						 " book_name='" + t.getName()+"'"+
-						 " ,author='" + t.getAuthor()+"'"+
-						 " ,release_date='" + t.getRelease_date()+"'"+
-						 " ,quantity=" + t.getQuantity()+
-						 " ,borrow_quantity=" + t.getBrr_quantity()+
-						 " WHERE book_id = " + t.getBook_id();	
+						 " book_name=?"+
+						 " ,author=?"+
+						 " ,release_date=?"+
+						 " ,quantity=?"+
+						 " ,borrow_quantity=?"+
+						 " WHERE book_id =?";	
 			
-			int ketQua = st.executeUpdate(sql);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, t.getName());
+			st.setString(2, t.getAuthor());
+			st.setDate(3, t.getRelease_date());
+			st.setInt(4, t.getQuantity());
+			st.setInt(5, t.getBrr_quantity());
+			st.setInt(6, t.getBook_id());
 			
-			System.out.println("Ban da thuc thi: "+sql);
-			System.out.println("Co "+ketQua+" dong bi thay doi!");		
+			st.executeUpdate();
 			
 			JDBC_Util.closeConnection(con);
 			
@@ -76,16 +87,14 @@ public class DAObooks implements DAOInterface<books>{
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
-			Statement st = con.createStatement();
 			
 			String sql = " DELETE from books "+
-					     " WHERE book_id="+ t.getBook_id();
+					     " WHERE book_id=?";
 						
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, t.getBook_id());
 			
-			int ketQua = st.executeUpdate(sql);
-			
-			System.out.println("Ban da thuc thi: "+sql);
-			System.out.println("Co "+ketQua+" dong bi thay doi!");		
+			int ketQua = st.executeUpdate();
 			
 			JDBC_Util.closeConnection(con);
 			
@@ -99,15 +108,67 @@ public class DAObooks implements DAOInterface<books>{
 	
 
 	@Override
-	public books selectById(books t) {
+	public books selectById(int id) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		books found = null;
+		
+		Connection con = JDBC_Util.getConnection();
+		
+		try {
 
+			String sql = "SELECT * FROM books WHERE book_id =?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				found = new books(rs.getInt("book_id"), rs.getString("book_name"),
+						rs.getString("author"), rs.getDate("release_date"), rs.getInt("quantity"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JDBC_Util.closeConnection(con);
+		
+		return found;
+	}
+	
 	@Override
 	public ArrayList<books> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		Connection con = JDBC_Util.getConnection();
+		
+		try {
+			Statement st = con.createStatement();
+			
+			String sql = "SELECT * FROM books";					 
+			
+			ResultSet rs = st.executeQuery(sql);
+			
+			while (rs.next()) {
+				books b = new books(rs.getInt("book_id"), rs.getString("book_name"),
+						rs.getString("author"), rs.getDate("release_date"), rs.getInt("quantity"));
+				ketQua.add(b);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (books i : ketQua) {
+			System.out.println(i.getName());
+		}
+		
+		JDBC_Util.closeConnection(con);
+		
+		return ketQua;
+		
 	}
 
 	@Override

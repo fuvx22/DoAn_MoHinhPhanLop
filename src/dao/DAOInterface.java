@@ -10,7 +10,7 @@ public interface DAOInterface<T> {
 	
 	public boolean update(T t);
 	
-	public T selectById(T t);
+	public T selectById(int id);
 	
 	public ArrayList<T> getAll();
 

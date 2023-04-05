@@ -27,7 +27,7 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 
 	@Override
-	public readers selectById(readers t) {
+	public readers selectById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,9 +6,9 @@ public class books {
 	private int book_id;
 	private String name;
 	private String author;
-	private Date release_date;
+	private Date rel_date;
 	private int quantity;
-	private int brr_quantity = 0;
+	private int brr_quan = 0;
 
 	public books() {
 		super();
@@ -18,7 +18,7 @@ public class books {
 		super();
 		this.name = name;
 		this.author = author;
-		this.release_date = release_date;
+		this.rel_date = release_date;
 		this.quantity = quantity;
 	}
 	
@@ -27,7 +27,7 @@ public class books {
 		this.book_id = id;
 		this.name = name;
 		this.author = author;
-		this.release_date = release_date;
+		this.rel_date = release_date;
 		this.quantity = quantity;
 	}
 
@@ -36,9 +36,9 @@ public class books {
 		this.book_id = book_id;
 		this.name = name;
 		this.author = author;
-		this.release_date = release_date;
+		this.rel_date = release_date;
 		this.quantity = quantity;
-		this.brr_quantity = brr_quantity;
+		this.brr_quan = brr_quantity;
 	}
 
 	public int getQuantity() {
@@ -74,19 +74,25 @@ public class books {
 	}
 
 	public Date getRelease_date() {
-		return release_date;
+		return rel_date;
 	}
 
 	public void setRelease_date(Date release_date) {
-		this.release_date = release_date;
+		this.rel_date = release_date;
 	}
 	
 	public int getBrr_quantity() {
-		return brr_quantity;
+		return brr_quan;
 	}
 	
 	public void setBrr_quantity(int brr_quantity) {
-		this.brr_quantity = brr_quantity;
+		this.brr_quan = brr_quantity;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "["+this.getBook_id()+this.getName()+this.getAuthor()+this.getRelease_date()+this.getQuantity()+"]";
 	}
 	
 }
