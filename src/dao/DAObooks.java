@@ -94,7 +94,7 @@ public class DAObooks implements DAOInterface<books>{
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, t.getBook_id());
 			
-			int ketQua = st.executeUpdate();
+			st.executeUpdate();
 			
 			JDBC_Util.closeConnection(con);
 			
@@ -159,10 +159,6 @@ public class DAObooks implements DAOInterface<books>{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		for (books i : ketQua) {
-			System.out.println(i.getName());
 		}
 		
 		JDBC_Util.closeConnection(con);

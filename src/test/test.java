@@ -1,12 +1,15 @@
 package test;
 
-
-import java.sql.Connection;
 import java.sql.Date;
 
 import dao.DAObooks;
-import database.JDBC_Util;
+import dao.DAOlibrarian;
+import dao.DAOloan_book;
+import dao.DAOreaders;
 import model.books;
+import model.librarian;
+import model.loan_book;
+import model.readers;
 
 public class test {
 	public static void main(String[] args) {
@@ -19,6 +22,10 @@ public class test {
 		
 //		DAObooks.getInstance().insert(book1);
 //		DAObooks.getInstance().insert(book2);
+		
+//		DAOloan_book.getInstance().insert(new loan_book(14,1,2,new Date(0),new Date(0),1));
+		
+		DAOlibrarian.getInstance().insert(new librarian("Nguyen Van A", "69 Nguyen Trai","admin","123"))
 		
 		//test update
 		

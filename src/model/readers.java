@@ -16,6 +16,14 @@ public class readers {
 		this.phone_number = phone_number;
 		this.address = address;
 	}
+	
+	public readers(int reader_id, String name, String phone_number, String address) {
+		super();
+		this.reader_id = reader_id;
+		this.name = name;
+		this.phone_number = phone_number;
+		this.address = address;
+	}
 
 	public int getReader_id() {
 		return reader_id;

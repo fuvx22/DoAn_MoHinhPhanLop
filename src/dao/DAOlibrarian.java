@@ -8,28 +8,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import database.JDBC_Util;
-import model.readers;
+import model.librarian;
 
-public class DAOreaders implements DAOInterface<readers>{
+public class DAOlibrarian implements DAOInterface<librarian>{
 	
-	ArrayList<readers> ketQua = new ArrayList<>();
+	ArrayList<librarian> ketQua = new ArrayList<>();
 	
-	public static DAOreaders getInstance() {
-		return new DAOreaders();
+	public static DAOlibrarian getInstance() {
+		return new DAOlibrarian();
 	}
 
 	@Override
-	public boolean insert(readers t) {
+	public boolean insert(librarian t) {
 		
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
-			String sql = "INSERT INTO readers (name, phone_number, address) "+
-						 "VALUES (?, ?, ?)";
+			String sql = "INSERT INTO librarian (name, address, log_name, log_pw) "+
+						 "VALUES (?, ?, ?, ?)";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getName());
-			st.setString(2, t.getPhone_number());
-			st.setString(3, t.getAddress());
+			st.setString(2, t.getAddress());
+			st.setString(3, t.getLogin_name());
+			st.setString(4, t.getLogin_pw());
 		
 				
 			st.executeUpdate();
@@ -45,21 +46,23 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 	
 	@Override
-	public boolean update(readers t) {
+	public boolean update(librarian t) {
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
 			
-			String sql = "UPDATE readers "+
+			String sql = "UPDATE librarian "+
 						 " SET "+
 						 " name=?"+
-						 " ,phone_number=?"+
-						 " ,address=";	
+						 " ,address=?"+
+						 " ,log_name=?"+
+						 " ,log_pw=?";	
 			
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getName());
-			st.setString(2, t.getPhone_number());
-			st.setString(3, t.getAddress());
+			st.setString(2, t.getAddress());
+			st.setString(3, t.getLogin_name());
+			st.setString(4, t.getLogin_pw());
 			
 			st.executeUpdate();
 			
@@ -73,16 +76,16 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 
 	@Override
-	public boolean delete(readers t) {
+	public boolean delete(librarian t) {
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
 			
-			String sql = " DELETE from readers "+
+			String sql = " DELETE from librarian "+
 					     " WHERE id=?";
 						
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1, t.getReader_id());
+			st.setInt(1, t.getId());
 			
 			st.executeUpdate();
 			
@@ -98,23 +101,23 @@ public class DAOreaders implements DAOInterface<readers>{
 	
 
 	@Override
-	public readers selectById(int id) {
+	public librarian selectById(int id) {
 		// TODO Auto-generated method stub
-		readers found = null;
+		librarian found = null;
 		
 		Connection con = JDBC_Util.getConnection();
 		
 		try {
 
-			String sql = "SELECT * FROM readers WHERE book_id =?";
+			String sql = "SELECT * FROM librarian WHERE book_id =?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			
 			ResultSet rs = st.executeQuery();
 			
 			if (rs.next()) {
-				found = new readers(rs.getInt("id"), rs.getString("name"),
-						rs.getString("phone_number"), rs.getString("address"));
+				found = new librarian(rs.getInt("id"), rs.getString("name"),
+						rs.getString("address"), rs.getString("log_name"), rs.getString("log_pw"));
 			}
 			
 			
@@ -129,20 +132,20 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 	
 	@Override
-	public ArrayList<readers> getAll() {
+	public ArrayList<librarian> getAll() {
 		// TODO Auto-generated method stub
 		Connection con = JDBC_Util.getConnection();
 		
 		try {
 			Statement st = con.createStatement();
 			
-			String sql = "SELECT * FROM readers";					 
+			String sql = "SELECT * FROM librarian";					 
 			
 			ResultSet rs = st.executeQuery(sql);
 			
 			while (rs.next()) {
-				readers b = new readers(rs.getInt("id"), rs.getString("name"),
-						rs.getString("phone_number"), rs.getString("address"));
+				librarian b = new librarian(rs.getInt("id"), rs.getString("name"),
+						rs.getString("address"), rs.getString("log_name"), rs.getString("log_pw"));
 				ketQua.add(b);
 			}
 			
@@ -151,6 +154,7 @@ public class DAOreaders implements DAOInterface<readers>{
 			e.printStackTrace();
 		}
 		
+		
 		JDBC_Util.closeConnection(con);
 		
 		return ketQua;
@@ -158,7 +162,7 @@ public class DAOreaders implements DAOInterface<readers>{
 	}
 
 	@Override
-	public ArrayList<readers> selectByCondition(String con) {
+	public ArrayList<librarian> selectByCondition(String con) {
 		// TODO Auto-generated method stub
 		return null;
 	}
