@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.homeView_controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -16,10 +19,28 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+import javax.swing.SpringLayout;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class home_view extends JFrame {
 
 	private JPanel contentPane;
+	ArrayList<JPanel> panelList;
+	private JPanel mainPanel;
+	private JPanel home_panel;
+	private JPanel book_panel;
+	private JPanel reader_panel;
+	private JPanel loan_panel;
+	private JPanel back_panel;
+	private JPanel stat_panel;
+	private JPanel lib_panel;
+	private CardLayout card;
 
 	/**
 	 * Launch the application.
@@ -30,6 +51,8 @@ public class home_view extends JFrame {
 				try {
 					home_view frame = new home_view();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,57 +70,139 @@ public class home_view extends JFrame {
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		
 		JPanel sideMenu = new JPanel();
+		sideMenu.setBounds(0, 0, 141, 661);
+		sideMenu.setMinimumSize(new Dimension(300, 10));
 		sideMenu.setBackground(new Color(128, 128, 255));
-		contentPane.add(sideMenu, BorderLayout.WEST);
+		contentPane.add(sideMenu);
+		sideMenu.setLayout(null);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBackground(new Color(128, 0, 255));
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JLabel home_btn = new JLabel("Trang chủ");
 		
-		JButton btnNewButton_2_1 = new JButton("New button");
-		btnNewButton_2_1.setBackground(new Color(128, 0, 255));
+		home_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		home_btn.setForeground(new Color(255, 255, 255));
+		home_btn.setBounds(10, 11, 131, 35);
+		home_btn.setName("home_btn");
+		sideMenu.add(home_btn);
 		
-		JButton btnNewButton_2_2 = new JButton("New button");
-		btnNewButton_2_2.setBackground(new Color(128, 0, 255));
 		
-		JButton btnNewButton_2_3 = new JButton("New button");
-		btnNewButton_2_3.setBackground(new Color(128, 0, 255));
 		
-		GroupLayout gl_sideMenu = new GroupLayout(sideMenu);
-		gl_sideMenu.setHorizontalGroup(
-			gl_sideMenu.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_sideMenu.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_sideMenu.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton_2_3)
-						.addComponent(btnNewButton_2_2)
-						.addComponent(btnNewButton_2_1)
-						.addComponent(btnNewButton_2))
-					.addContainerGap(15, Short.MAX_VALUE))
-		);
-		gl_sideMenu.setVerticalGroup(
-			gl_sideMenu.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_sideMenu.createSequentialGroup()
-					.addGap(32)
-					.addComponent(btnNewButton_2_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_2)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_2_2)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_2_3)
-					.addContainerGap(529, Short.MAX_VALUE))
-		);
-		sideMenu.setLayout(gl_sideMenu);
+		JLabel book_btn = new JLabel("Quản lý sách");
+		book_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		book_btn.setForeground(new Color(255, 255, 255));
+		book_btn.setBounds(10, 57, 131, 35);
+		book_btn.setName("book_btn");
+		sideMenu.add(book_btn);
 		
-		JPanel home = new JPanel();
-		contentPane.add(home, BorderLayout.CENTER);
-		home.setLayout(new CardLayout(0, 0));
+		JLabel reader_btn = new JLabel("Quản lý độc giả");
+		reader_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		reader_btn.setForeground(new Color(255, 255, 255));
+		reader_btn.setBounds(10, 103, 131, 35);
+		reader_btn.setName("reader_btn");
+		sideMenu.add(reader_btn);
+		
+		JLabel loan_btn = new JLabel("Quản lý mượn sách");
+		loan_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		loan_btn.setForeground(new Color(255, 255, 255));
+		loan_btn.setBounds(10, 149, 131, 35);
+		loan_btn.setName("loan_btn");
+		sideMenu.add(loan_btn);
+		
+		JLabel back_btn = new JLabel("Quản lý trả sách");
+		back_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		back_btn.setForeground(new Color(255, 255, 255));
+		back_btn.setBounds(10, 195, 131, 35);
+		back_btn.setName("back_btn");
+		sideMenu.add(back_btn);
+		
+		JLabel stat_btn = new JLabel("Thống kê");
+		stat_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		stat_btn.setForeground(new Color(255, 255, 255));
+		stat_btn.setBounds(10, 241, 131, 35);
+		stat_btn.setName("stat_btn");
+		sideMenu.add(stat_btn);
+		
+		JLabel logout_btn = new JLabel("Đăng xuất");
+		logout_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		logout_btn.setForeground(new Color(255, 255, 255));
+		logout_btn.setBounds(10, 615, 131, 35);
+		logout_btn.setName("logout_btn");
+		sideMenu.add(logout_btn);
+		
+		JLabel lib_btn = new JLabel("Quản lý thủ thư");
+		lib_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lib_btn.setForeground(new Color(255, 255, 255));
+		lib_btn.setBounds(10, 569, 131, 35);
+		lib_btn.setName("lib_btn");
+		sideMenu.add(lib_btn);
+		
+		
+		mainPanel = new JPanel();
+		mainPanel.setBounds(140, 0, 944, 661);
+		contentPane.add(mainPanel);
+		
+		card = new CardLayout(0, 0);
+		mainPanel.setLayout(card);
+		
+		home_panel = new JPanel();
+		home_panel.setBackground(new Color(128, 255, 128));
+		mainPanel.add(home_panel, "home_btn");
+		
+		book_panel = new JPanel();
+		book_panel.setBackground(new Color(128, 255, 0));
+		mainPanel.add(book_panel, "book_btn");
+		
+		reader_panel = new JPanel();
+		reader_panel.setBackground(new Color(0, 255, 0));
+		mainPanel.add(reader_panel, "reader_btn");
+		
+		loan_panel = new JPanel();
+		loan_panel.setBackground(new Color(0, 128, 0));
+		mainPanel.add(loan_panel, "loan_btn");
+		
+		back_panel = new JPanel();
+		back_panel.setBackground(new Color(0, 64, 0));
+		mainPanel.add(back_panel, "back_btn");
+		
+		stat_panel = new JPanel();
+		stat_panel.setBackground(new Color(128, 128, 64));
+		mainPanel.add(stat_panel, "stat_btn");
+		
+		lib_panel = new JPanel();
+		lib_panel.setBackground(new Color(0, 128, 128));
+		mainPanel.add(lib_panel, "lib_btn");
+		
+		panelList = new ArrayList<>();
+		
+		panelList.add(home_panel);
+		panelList.add(book_panel);
+		panelList.add(reader_panel);
+		panelList.add(loan_panel);
+		panelList.add(back_panel);
+		panelList.add(stat_panel);
+		panelList.add(lib_panel);
+		
+		
+		homeView_controller control = new homeView_controller(this);
+		
+		home_btn.addMouseListener(control);
+		book_btn.addMouseListener(control);
+		reader_btn.addMouseListener(control);
+		loan_btn.addMouseListener(control);
+		back_btn.addMouseListener(control);
+		stat_btn.addMouseListener(control);
+		logout_btn.addMouseListener(control);
+		lib_btn.addMouseListener(control);
+			
+	}
+
+	public void changePanel(String name) {
+		card.show(mainPanel, name);
+	}
+
+	public void hoverEffect() {
+		
 	}
 }
