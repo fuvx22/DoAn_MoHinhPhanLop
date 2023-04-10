@@ -41,6 +41,8 @@ public class home_view extends JFrame {
 	private JPanel stat_panel;
 	private JPanel lib_panel;
 	private CardLayout card;
+	public int x = 1;
+	private JLabel home_btn;
 
 	/**
 	 * Launch the application.
@@ -73,13 +75,14 @@ public class home_view extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel sideMenu = new JPanel();
-		sideMenu.setBounds(0, 0, 141, 661);
+		sideMenu.setBounds(0, 0, 141, 663);
 		sideMenu.setMinimumSize(new Dimension(300, 10));
 		sideMenu.setBackground(new Color(128, 128, 255));
 		contentPane.add(sideMenu);
+		
 		sideMenu.setLayout(null);
 		
-		JLabel home_btn = new JLabel("Trang chủ");
+		home_btn = new JLabel("Trang chủ");
 		
 		home_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		home_btn.setForeground(new Color(255, 255, 255));
@@ -140,7 +143,7 @@ public class home_view extends JFrame {
 		
 		
 		mainPanel = new JPanel();
-		mainPanel.setBounds(140, 0, 944, 661);
+		mainPanel.setBounds(140, 0, 946, 663);
 		contentPane.add(mainPanel);
 		
 		card = new CardLayout(0, 0);
@@ -202,7 +205,11 @@ public class home_view extends JFrame {
 		card.show(mainPanel, name);
 	}
 
-	public void hoverEffect() {
-		
+	public void hoverEffect(JLabel label) {
+//		if(label.getText() == home_btn.getText()) {
+//			home_btn.setBackground(Color.YELLOW);
+//			System.out.println("hi");
+//			label.setOpaque(true);
+//		}
 	}
 }

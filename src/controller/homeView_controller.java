@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
+
 import view.home_view;
 
 public class homeView_controller implements MouseListener{
@@ -32,12 +34,12 @@ public class homeView_controller implements MouseListener{
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		view.hoverEffect();
+		view.hoverEffect((JLabel) e.getComponent());
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		view.hoverEffect((JLabel) e.getComponent());
 	}
 
 }
