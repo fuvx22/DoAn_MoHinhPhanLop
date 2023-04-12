@@ -3,19 +3,17 @@ package view;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import controller.books_controller;
+import model.books;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.awt.Rectangle;
-import java.awt.ScrollPane;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,6 +28,7 @@ public class books_view extends JPanel {
 	private JTable table;
 	
 	private Color primaryColor = new Color(155, 250, 184);
+	private JPanel dataView;
 	
 
 	/**
@@ -138,28 +137,35 @@ public class books_view extends JPanel {
 		del_btn.setBounds(125, 87, 104, 33);
 		controlView.add(del_btn);
 		
-		JPanel dataView = new JPanel();
+		dataView = new JPanel();
 		dataView.setBackground(new Color(255, 255, 255));
 		add(dataView, BorderLayout.CENTER);
 		dataView.setLayout(new BorderLayout(0, 0));
 		
 		// Tạo bảng hiển thị dữ liệu
-		String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"}; 
+		 
 		
-		table = new JTable(null, column);
+		table = new JTable();
 		table.setBackground(primaryColor);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.getViewport().setBackground(primaryColor);
-		
-		DefaultTableModel model = new DefaultTableModel(null,column);	
-		
-		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
-		
-		table.setModel(model);
-		
+		scrollPane.getViewport().setBackground(primaryColor);	
 		dataView.add(scrollPane, BorderLayout.CENTER);
 		
+		// hàm test hiển thị ds dữ liệu sách
+		showBooksList(table);
+	
+		// test lấy dữ liệu thông qua controller
+		books_controller control = new books_controller(this);
+		System.out.println(control.getBooksList());
+	}
+	public void showBooksList(ArrayList<books> list) {
 		
+	}
+	public void showBooksList(JTable table) {
+		String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
+		DefaultTableModel model = new DefaultTableModel(null,column);		
+		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
+		table.setModel(model);
 	}
 }
