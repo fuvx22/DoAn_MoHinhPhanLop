@@ -66,18 +66,20 @@ public class home_view extends JFrame {
 	 * Create the frame.
 	 */
 	public home_view() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel sideMenu = new JPanel();
-		sideMenu.setBounds(0, 0, 141, 663);
+		sideMenu.setBounds(0, 0, 134, 663);
 		sideMenu.setMinimumSize(new Dimension(300, 10));
-		sideMenu.setBackground(new Color(0, 128, 128));
+		sideMenu.setBackground(new Color(50, 201, 96));
 		contentPane.add(sideMenu);
 		
 		sideMenu.setLayout(null);
@@ -151,19 +153,21 @@ public class home_view extends JFrame {
 		
 		
 		mainPanel = new JPanel();
-		mainPanel.setBounds(140, 0, 946, 663);
+		mainPanel.setBackground(new Color(240, 240, 240));
+		mainPanel.setBounds(144, 10, 932, 643);
 		contentPane.add(mainPanel);
 		
 		card = new CardLayout(0, 0);
 		mainPanel.setLayout(card);
 		
-		home_panel = new books_view();
-		home_panel.setBackground(new Color(0, 159, 159));
-//		home_panel.setBackground(new Color(128, 255, 128));
+		// Thêm panel vào các tab 
+		
+		home_panel = new JPanel();
+		home_panel.setBackground(new Color(04, 67, 78));
 		mainPanel.add(home_panel, "home_btn");
 		
-		book_panel = new JPanel();
-		book_panel.setBackground(new Color(128, 255, 0));
+		book_panel = new books_view();
+
 		mainPanel.add(book_panel, "book_btn");
 		
 		reader_panel = new JPanel();
@@ -185,7 +189,6 @@ public class home_view extends JFrame {
 		lib_panel = new JPanel();
 		lib_panel.setBackground(new Color(0, 128, 128));
 		mainPanel.add(lib_panel, "lib_btn");
-		
 		
 		homeView_controller control = new homeView_controller(this);
 		

@@ -29,20 +29,20 @@ public class books_view extends JPanel {
 	private JTextField quanText;
 	private JTable table;
 	
-	private Color primaryColor = new Color(0, 240, 240);
+	private Color primaryColor = new Color(155, 250, 184);
 	
 
 	/**
 	 * Create the panel.
 	 */
 	public books_view() {
-		setBackground(new Color(0, 128, 128));
-		setLayout(new BorderLayout(0, 20));
+		setBorder(null);
+		setBackground(new Color(255, 255, 255));
+		setLayout(new BorderLayout(0, 10));
 		setBounds(0, 0, 946, 663);
-		setOpaque(true);
 		
 		JPanel controlView = new JPanel();
-		controlView.setOpaque(false);
+		controlView.setBackground(new Color(255, 255, 255));
 		controlView.setPreferredSize(new Dimension(1, 120));
 		controlView.setSize(WIDTH, 300);
 		add(controlView, BorderLayout.NORTH);
@@ -101,19 +101,21 @@ public class books_view extends JPanel {
 		find_tab.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setBounds(0, 1, 446, 33);
 		textField.setPreferredSize(new Dimension(200, 22));
 		textField.setColumns(10);
 		find_tab.add(textField);
 		
 		JButton find_btn = new JButton("Tìm kiếm");
+		find_btn.setBackground(new Color(247, 250, 124));
 		find_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		find_btn.setPreferredSize(new Dimension(100, 30));
 		find_btn.setBounds(new Rectangle(456, 0, 100, 33));
 		find_tab.add(find_btn);
 		
 		JButton edit_btn = new JButton("Sửa");
+		edit_btn.setBackground(new Color(247, 250, 124));
 		edit_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		edit_btn.setPreferredSize(new Dimension(100, 30));
 		edit_btn.setBounds(new Rectangle(220, 5, 90, 20));
@@ -121,6 +123,7 @@ public class books_view extends JPanel {
 		controlView.add(edit_btn);
 		
 		JButton add_btn = new JButton("Thêm");
+		add_btn.setBackground(new Color(247, 250, 124));
 		add_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add_btn.setPreferredSize(new Dimension(100, 30));
 		add_btn.setBounds(new Rectangle(30, 5, 90, 20));
@@ -128,6 +131,7 @@ public class books_view extends JPanel {
 		controlView.add(add_btn);
 		
 		JButton del_btn = new JButton("Xóa");
+		del_btn.setBackground(new Color(247, 250, 124));
 		del_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		del_btn.setPreferredSize(new Dimension(100, 30));
 		del_btn.setBounds(new Rectangle(125, 5, 90, 20));
@@ -135,29 +139,26 @@ public class books_view extends JPanel {
 		controlView.add(del_btn);
 		
 		JPanel dataView = new JPanel();
-		dataView.setOpaque(false);
+		dataView.setBackground(new Color(255, 255, 255));
 		add(dataView, BorderLayout.CENTER);
 		dataView.setLayout(new BorderLayout(0, 0));
 		
-		Object data[][]={ {"Sv01","Nguyen Van An","7.5"}, 
-				{"Sv02","Le THi THuong","8.0"}, 
-				{"Sv03","Hoang Ha","6.5"}};
-				String column[]={"ID","NAME","MARK"}; 
-
+		// Tạo bảng hiển thị dữ liệu
+		String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"}; 
 		
-		table = new JTable(data, column);
+		table = new JTable(null, column);
 		table.setBackground(primaryColor);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.getViewport().setBackground(primaryColor);
-		scrollPane.setBackground(new Color(0, 159, 159));
 		
-
-		DefaultTableModel model = new DefaultTableModel(data,column);	
-		model.addRow(new Object[]{"Sv04","Trinh Phu","10"});
+		DefaultTableModel model = new DefaultTableModel(null,column);	
+		
+		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
+		
 		table.setModel(model);
 		
-		dataView.add(scrollPane, BorderLayout.NORTH);
+		dataView.add(scrollPane, BorderLayout.CENTER);
 		
 		
 	}
