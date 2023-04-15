@@ -30,6 +30,8 @@ public class books_view extends JPanel {
 	private Color primaryColor = new Color(155, 250, 184);
 	private JPanel dataView;
 	
+	String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
+	private DefaultTableModel model;
 
 	/**
 	 * Create the panel.
@@ -162,10 +164,9 @@ public class books_view extends JPanel {
 	public void showBooksList(ArrayList<books> list) {
 		
 	}
-	public void showBooksList(JTable table) {
-		String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
-		DefaultTableModel model = new DefaultTableModel(null,column);		
-		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
+	public void showBooksList(JTable table) {	
+		model = new DefaultTableModel(null,column);		
 		table.setModel(model);
+		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
 	}
 }
