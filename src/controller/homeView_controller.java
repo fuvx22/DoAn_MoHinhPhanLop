@@ -34,12 +34,11 @@ public class homeView_controller implements MouseListener{
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		view.hoverEffect((JLabel) e.getComponent());
+		view.hoverEffect((JLabel) e.getSource());
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		view.hoverEffect((JLabel) e.getComponent());
+		view.exitHover((JLabel) e.getSource());
 	}
 
 }

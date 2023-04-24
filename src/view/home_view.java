@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 import javax.swing.SpringLayout;
 import java.awt.Font;
@@ -28,6 +30,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
+import java.awt.Rectangle;
+import java.awt.Transparency;
 
 public class home_view extends JFrame {
 
@@ -74,87 +78,93 @@ public class home_view extends JFrame {
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel sideMenu = new JPanel();
-		sideMenu.setBounds(0, 0, 134, 663);
-		sideMenu.setMinimumSize(new Dimension(300, 10));
+		sideMenu.setPreferredSize(new Dimension(150, 10));
 		sideMenu.setBackground(new Color(50, 201, 96));
-		contentPane.add(sideMenu);
+		contentPane.add(sideMenu, BorderLayout.WEST);
 		
 		sideMenu.setLayout(null);
 		
 		home_btn = new JLabel("Trang chủ");
+		home_btn.setPreferredSize(new Dimension(150, 0));
 		home_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		home_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		home_btn.setForeground(new Color(255, 255, 255));
-		home_btn.setBounds(0, 11, 141, 35);
+		home_btn.setBounds(0, 11, 150, 35);
 		home_btn.setName("home_btn");
 		sideMenu.add(home_btn);
 		
 		
 		
 		JLabel book_btn = new JLabel("Quản lý sách");
+		book_btn.setPreferredSize(new Dimension(150, 0));
 		book_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		book_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		book_btn.setForeground(new Color(255, 255, 255));
-		book_btn.setBounds(0, 57, 141, 35);
+		book_btn.setBounds(0, 57, 150, 35);
 		book_btn.setName("book_btn");
 		sideMenu.add(book_btn);
 		
 		JLabel reader_btn = new JLabel("Quản lý độc giả");
+		reader_btn.setPreferredSize(new Dimension(150, 0));
 		reader_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		reader_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		reader_btn.setForeground(new Color(255, 255, 255));
-		reader_btn.setBounds(0, 103, 141, 35);
+		reader_btn.setBounds(0, 103, 150, 35);
 		reader_btn.setName("reader_btn");
 		sideMenu.add(reader_btn);
 		
 		JLabel loan_btn = new JLabel("Quản lý mượn sách");
+		loan_btn.setPreferredSize(new Dimension(150, 0));
 		loan_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		loan_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		loan_btn.setForeground(new Color(255, 255, 255));
-		loan_btn.setBounds(0, 149, 141, 35);
+		loan_btn.setBounds(0, 149, 150, 35);
 		loan_btn.setName("loan_btn");
 		sideMenu.add(loan_btn);
 		
 		JLabel back_btn = new JLabel("Quản lý trả sách");
+		back_btn.setPreferredSize(new Dimension(150, 0));
 		back_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		back_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		back_btn.setForeground(new Color(255, 255, 255));
-		back_btn.setBounds(0, 195, 141, 35);
+		back_btn.setBounds(0, 195, 150, 35);
 		back_btn.setName("back_btn");
 		sideMenu.add(back_btn);
 		
 		JLabel stat_btn = new JLabel("Thống kê");
+		stat_btn.setPreferredSize(new Dimension(150, 0));
 		stat_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		stat_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		stat_btn.setForeground(new Color(255, 255, 255));
-		stat_btn.setBounds(0, 241, 141, 35);
+		stat_btn.setBounds(0, 241, 150, 35);
 		stat_btn.setName("stat_btn");
 		sideMenu.add(stat_btn);
 		
 		JLabel logout_btn = new JLabel("Đăng xuất");
+		logout_btn.setPreferredSize(new Dimension(150, 0));
 		logout_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		logout_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		logout_btn.setForeground(new Color(255, 255, 255));
-		logout_btn.setBounds(0, 615, 141, 35);
+		logout_btn.setBounds(0, 615, 150, 35);
 		logout_btn.setName("logout_btn");
 		sideMenu.add(logout_btn);
 		
 		JLabel lib_btn = new JLabel("Quản lý thủ thư");
+		lib_btn.setPreferredSize(new Dimension(150, 0));
 		lib_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		lib_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lib_btn.setForeground(new Color(255, 255, 255));
-		lib_btn.setBounds(0, 569, 141, 35);
+		lib_btn.setBounds(0, 569, 150, 35);
 		lib_btn.setName("lib_btn");
 		sideMenu.add(lib_btn);
 		
 		
 		mainPanel = new JPanel();
 		mainPanel.setBackground(new Color(240, 240, 240));
-		mainPanel.setBounds(144, 10, 932, 643);
 		contentPane.add(mainPanel);
 		
 		card = new CardLayout(0, 0);
@@ -163,6 +173,7 @@ public class home_view extends JFrame {
 		// Thêm panel vào các tab 
 		
 		home_panel = new JPanel();
+		home_panel.setBounds(new Rectangle(0, 0, 150, 0));
 		home_panel.setBackground(new Color(04, 67, 78));
 		mainPanel.add(home_panel, "home_btn");
 		
@@ -207,11 +218,16 @@ public class home_view extends JFrame {
 		card.show(mainPanel, name);
 	}
 
-	public void hoverEffect(JLabel label) {
-//		if(label.getText() == home_btn.getText()) {
-//			home_btn.setBackground(Color.YELLOW);
-//			System.out.println("hi");
-//			label.setOpaque(true);
-//		}
+	public void hoverEffect(JLabel source) {
+		source.setOpaque(true);
+		source.setBackground(new Color(20, 181, 69));
+	}
+
+	public void exitHover(JLabel source) {
+		source.setBackground(new Color(50, 201, 96));
+	}
+	public static void warning(String message) {
+		JOptionPane.showMessageDialog(null,message,"thông báo",
+		        JOptionPane.WARNING_MESSAGE);
 	}
 }

@@ -12,26 +12,35 @@ import controller.books_controller;
 import model.books;
 import java.awt.Dimension;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.util.ArrayList;
+import java.util.logging.SimpleFormatter;
 import java.awt.Rectangle;
+import java.text.SimpleDateFormat;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
+import com.toedter.calendar.JDateChooser;
 
 public class books_view extends JPanel {
-	private JTextField textField;
-	private JTextField authorText;
-	private JTextField dateText;
-	private JTextField nameText;
-	private JTextField quanText;
-	private JTable table;
+	public JTextField textField;
+	public JTextField authorText;
+	public JTextField nameText;
+	public JTextField quanText;
+	public JDateChooser dateText;
+	public JTable table;
 	
-	private Color primaryColor = new Color(155, 250, 184);
-	private JPanel dataView;
+	public Color primaryColor = new Color(155, 250, 184);
+	public JPanel dataView;
 	
+	public JButton find_btn;
+	public JButton edit_btn;
+	public JButton add_btn;
+	public JComponent del_btn;
+	public DefaultTableModel model;
 	String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
-	private DefaultTableModel model;
 
 	/**
 	 * Create the panel.
@@ -80,11 +89,6 @@ public class books_view extends JPanel {
 		lblNewLabel_2_1.setBounds(446, 41, 89, 26);
 		input_tab.add(lblNewLabel_2_1);
 		
-		dateText = new JTextField();
-		dateText.setBounds(545, 39, 218, 26);
-		dateText.setColumns(10);
-		input_tab.add(dateText);
-		
 		nameText = new JTextField();
 		nameText.setColumns(10);
 		nameText.setBounds(166, 10, 218, 26);
@@ -94,6 +98,10 @@ public class books_view extends JPanel {
 		quanText.setColumns(10);
 		quanText.setBounds(545, 10, 218, 26);
 		input_tab.add(quanText);
+		
+		dateText = new JDateChooser();
+		dateText.setBounds(545, 41, 218, 24);
+		input_tab.add(dateText);
 		
 		JPanel find_tab = new JPanel();
 		find_tab.setOpaque(false);
@@ -108,14 +116,14 @@ public class books_view extends JPanel {
 		textField.setColumns(10);
 		find_tab.add(textField);
 		
-		JButton find_btn = new JButton("Tìm kiếm");
+		find_btn = new JButton("Tìm kiếm");
 		find_btn.setBackground(new Color(247, 250, 124));
 		find_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		find_btn.setPreferredSize(new Dimension(100, 30));
 		find_btn.setBounds(new Rectangle(456, 0, 100, 33));
 		find_tab.add(find_btn);
 		
-		JButton edit_btn = new JButton("Sửa");
+		edit_btn = new JButton("Sửa");
 		edit_btn.setBackground(new Color(247, 250, 124));
 		edit_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		edit_btn.setPreferredSize(new Dimension(100, 30));
@@ -123,7 +131,7 @@ public class books_view extends JPanel {
 		edit_btn.setBounds(239, 87, 105, 33);
 		controlView.add(edit_btn);
 		
-		JButton add_btn = new JButton("Thêm");
+		add_btn = new JButton("Thêm");
 		add_btn.setBackground(new Color(247, 250, 124));
 		add_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add_btn.setPreferredSize(new Dimension(100, 30));
@@ -131,7 +139,7 @@ public class books_view extends JPanel {
 		add_btn.setBounds(10, 87, 105, 33);
 		controlView.add(add_btn);
 		
-		JButton del_btn = new JButton("Xóa");
+		del_btn = new JButton("Xóa");
 		del_btn.setBackground(new Color(247, 250, 124));
 		del_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		del_btn.setPreferredSize(new Dimension(100, 30));
@@ -148,25 +156,34 @@ public class books_view extends JPanel {
 		 
 		
 		table = new JTable();
-		table.setBackground(primaryColor);
+		table.setBackground(new Color(208, 253, 218));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.getViewport().setBackground(primaryColor);	
 		dataView.add(scrollPane, BorderLayout.CENTER);
 		
-		// hàm test hiển thị ds dữ liệu sách
-		showBooksList(table);
-	
-		// test lấy dữ liệu thông qua controller
 		books_controller control = new books_controller(this);
-		System.out.println(control.getBooksList());
-	}
-	public void showBooksList(ArrayList<books> list) {
+		add_btn.addActionListener(control);
 		
 	}
-	public void showBooksList(JTable table) {	
+	public void loadTable(ArrayList<books> list) {
+		String rel_date;
 		model = new DefaultTableModel(null,column);		
-		table.setModel(model);
-		model.addRow(new Object[] {"11","How to become rich","Phúc Ng","29/02/2023","20","0"});
+		for (books book : list) {
+			try {
+				rel_date = new SimpleDateFormat("dd/MM/yyyy").format(book.getRelease_date());
+			} catch (Exception e) {
+				rel_date = "NULL";
+			}
+			model.addRow(new Object[] {book.getBook_id(),book.getName(),
+					book.getAuthor(),rel_date,book.getQuantity(),book.getBrr_quantity()});
+		}
+		table.setModel(model);	
+	}
+	public void clearText() {
+		this.nameText.setText("");
+		this.quanText.setText("");
+		this.authorText.setText("");
+		this.dateText.setDateFormatString("");
 	}
 }
