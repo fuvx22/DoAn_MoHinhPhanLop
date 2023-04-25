@@ -32,10 +32,7 @@ public class DAObooks implements DAOInterface<books>{
 			st.setDate(3, t.getRelease_date());
 			st.setInt(4, t.getQuantity());
 			st.setInt(5, t.getBrr_quantity());
-			
-//			String sql = "INSERT INTO books (book_name, author, release_date, quantity, borrow_quantity) "+
-//						 "VALUES ('"+t.getName()+"', '"+t.getAuthor()+"', '"+t.getRelease_date()+"', "+t.getQuantity()+", "+t.getBrr_quantity()+")";
-				
+					
 			st.executeUpdate();
 					
 			JDBC_Util.closeConnection(con);

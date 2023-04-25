@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class books {
 	private int book_id;
@@ -40,7 +41,7 @@ public class books {
 		this.quantity = quantity;
 		this.brr_quan = brr_quantity;
 	}
-
+	
 	public int getQuantity() {
 		return quantity;
 	}
@@ -95,4 +96,17 @@ public class books {
 		return "["+this.getBook_id()+this.getName()+this.getAuthor()+this.getRelease_date()+this.getQuantity()+"]";
 	}
 	
+	public void setProperty(String name, String author, int quantity, java.util.Date release_date) {		
+		String rel_date = new SimpleDateFormat("yyyy-MM-dd").format(release_date);
+		this.setName(name.trim());
+		this.setAuthor(author.trim());
+		this.setQuantity(quantity);
+		this.setRelease_date(Date.valueOf(rel_date));
+	}
+	public boolean compare(books other) {
+		if (this.toString().equals(other.toString())) {
+			return true;
+		}
+		else return false;
+	}
 }

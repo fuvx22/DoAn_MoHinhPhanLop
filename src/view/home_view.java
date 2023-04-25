@@ -230,4 +230,8 @@ public class home_view extends JFrame {
 		JOptionPane.showMessageDialog(null,message,"thông báo",
 		        JOptionPane.WARNING_MESSAGE);
 	}
+	public static void notify(String message) {
+		JOptionPane.showMessageDialog(null,message,"thông báo",
+		        JOptionPane.PLAIN_MESSAGE);
+	}
 }

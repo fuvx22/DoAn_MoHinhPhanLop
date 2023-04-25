@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -15,8 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.SimpleFormatter;
 import java.awt.Rectangle;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.awt.Font;
 import javax.swing.JScrollPane;
@@ -38,9 +41,10 @@ public class books_view extends JPanel {
 	public JButton find_btn;
 	public JButton edit_btn;
 	public JButton add_btn;
-	public JComponent del_btn;
+	public JButton del_btn;
 	public DefaultTableModel model;
 	String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
+	private books_controller control;
 
 	/**
 	 * Create the panel.
@@ -162,8 +166,12 @@ public class books_view extends JPanel {
 		scrollPane.getViewport().setBackground(primaryColor);	
 		dataView.add(scrollPane, BorderLayout.CENTER);
 		
-		books_controller control = new books_controller(this);
+		control = new books_controller(this);
+		
 		add_btn.addActionListener(control);
+		del_btn.addActionListener(control);
+		edit_btn.addActionListener(control);
+		find_btn.addActionListener(control);
 		
 	}
 	public void loadTable(ArrayList<books> list) {
@@ -184,6 +192,12 @@ public class books_view extends JPanel {
 		this.nameText.setText("");
 		this.quanText.setText("");
 		this.authorText.setText("");
-		this.dateText.setDateFormatString("");
+		this.dateText.setDate(null);
+	}
+	public void setText(String name, int quantity, String author, Date date) {
+		this.nameText.setText(name);
+		this.quanText.setText(quantity+"");
+		this.authorText.setText(author);
+		this.dateText.setDate(date);
 	}
 }
