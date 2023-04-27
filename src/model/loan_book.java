@@ -12,6 +12,16 @@ public class loan_book {
 	private int lib_id;
 	private boolean state = true;
 	
+	public loan_book(loan_book other) {
+		this.book_id = other.book_id;
+		this.reader_id = other.reader_id;
+		this.quantity = other.quantity;
+		this.loan_date = other.loan_date;
+		this.exp_date = other.exp_date;
+		this.lib_id = other.lib_id;
+		this.state = other.state;
+	}
+	
 	public boolean isState() {
 		return state;
 	}
@@ -33,6 +43,15 @@ public class loan_book {
 		this.exp_date = exp_date;
 		this.lib_id = lib_id;
 		this.state = s;
+	}
+	public loan_book(int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id) {
+		super();
+		this.book_id = book_id;
+		this.reader_id = reader_id;
+		this.quantity = quantity;
+		this.loan_date = loan_date;
+		this.exp_date = exp_date;
+		this.lib_id = lib_id;
 	}
 	
 	public loan_book(int id, int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id, boolean s) {

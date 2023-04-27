@@ -38,14 +38,11 @@ public class home_view extends JFrame {
 	private JPanel contentPane;
 	ArrayList<JPanel> panelList;
 	private JPanel mainPanel;
-	private JPanel home_panel;
 	private JPanel book_panel;
 	private JPanel reader_panel;
 	private JPanel loan_panel;
-	private JPanel back_panel;
 	private JPanel stat_panel;
 	private JPanel lib_panel;
-	private JLabel home_btn;
 	private CardLayout card;
 
 	/**
@@ -87,16 +84,6 @@ public class home_view extends JFrame {
 		
 		sideMenu.setLayout(null);
 		
-		home_btn = new JLabel("Trang chủ");
-		home_btn.setPreferredSize(new Dimension(150, 0));
-		home_btn.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		home_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
-		home_btn.setForeground(new Color(255, 255, 255));
-		home_btn.setBounds(0, 11, 150, 35);
-		home_btn.setName("home_btn");
-		sideMenu.add(home_btn);
-		
 		
 		
 		JLabel book_btn = new JLabel("Quản lý sách");
@@ -126,21 +113,12 @@ public class home_view extends JFrame {
 		loan_btn.setName("loan_btn");
 		sideMenu.add(loan_btn);
 		
-		JLabel back_btn = new JLabel("Quản lý trả sách");
-		back_btn.setPreferredSize(new Dimension(150, 0));
-		back_btn.setHorizontalAlignment(SwingConstants.LEFT);
-		back_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
-		back_btn.setForeground(new Color(255, 255, 255));
-		back_btn.setBounds(0, 195, 150, 35);
-		back_btn.setName("back_btn");
-		sideMenu.add(back_btn);
-		
 		JLabel stat_btn = new JLabel("Thống kê");
 		stat_btn.setPreferredSize(new Dimension(150, 0));
 		stat_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		stat_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		stat_btn.setForeground(new Color(255, 255, 255));
-		stat_btn.setBounds(0, 241, 150, 35);
+		stat_btn.setBounds(0, 194, 150, 35);
 		stat_btn.setName("stat_btn");
 		sideMenu.add(stat_btn);
 		
@@ -170,13 +148,6 @@ public class home_view extends JFrame {
 		card = new CardLayout(0, 0);
 		mainPanel.setLayout(card);
 		
-		// Thêm panel vào các tab 
-		
-		home_panel = new JPanel();
-		home_panel.setBounds(new Rectangle(0, 0, 150, 0));
-		home_panel.setBackground(new Color(04, 67, 78));
-		mainPanel.add(home_panel, "home_btn");
-		
 		book_panel = new books_view();
 
 		mainPanel.add(book_panel, "book_btn");
@@ -185,13 +156,9 @@ public class home_view extends JFrame {
 		reader_panel.setBackground(new Color(0, 255, 0));
 		mainPanel.add(reader_panel, "reader_btn");
 		
-		loan_panel = new JPanel();
+		loan_panel = new loan_book_view();
 		loan_panel.setBackground(new Color(0, 128, 0));
 		mainPanel.add(loan_panel, "loan_btn");
-		
-		back_panel = new JPanel();
-		back_panel.setBackground(new Color(0, 64, 0));
-		mainPanel.add(back_panel, "back_btn");
 		
 		stat_panel = new JPanel();
 		stat_panel.setBackground(new Color(128, 128, 64));
@@ -202,12 +169,9 @@ public class home_view extends JFrame {
 		mainPanel.add(lib_panel, "lib_btn");
 		
 		homeView_controller control = new homeView_controller(this);
-		
-		home_btn.addMouseListener(control);
 		book_btn.addMouseListener(control);
 		reader_btn.addMouseListener(control);
 		loan_btn.addMouseListener(control);
-		back_btn.addMouseListener(control);
 		stat_btn.addMouseListener(control);
 		logout_btn.addMouseListener(control);
 		lib_btn.addMouseListener(control);

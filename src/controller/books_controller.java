@@ -27,8 +27,8 @@ public class books_controller implements ActionListener{
 	private String author;
 	private int quantity;
 	private String rel_date;
-	private books bookDTO;
 	private int selectRow = -1;
+	private books bookDTO;
 	
 	public books_controller(books_view context) {	
 		this.context = context;
@@ -43,10 +43,6 @@ public class books_controller implements ActionListener{
 //		Xử lý thêm sách
 		
 		if(e.getSource().equals(context.add_btn)) {	
-			if (context.dateText.getDate() == null) {
-				home_view.warning("vui lòng chọn ngày xuất bản");
-				return;
-			}
 			try {
 				
 				book_name = context.nameText.getText();
@@ -71,10 +67,6 @@ public class books_controller implements ActionListener{
 		
 //		Xử lý sửa sách		
 		if (e.getSource().equals(context.edit_btn)) {
-			if (context.dateText.getDate() == null) {
-				home_view.warning("vui lòng chọn ngày xuất bản");
-				return;
-			}
 			if (selectRow != -1) {
 				
 				bookDTO = new books();
