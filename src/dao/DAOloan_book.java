@@ -42,9 +42,10 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	@Override

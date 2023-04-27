@@ -149,7 +149,6 @@ public class home_view extends JFrame {
 		mainPanel.setLayout(card);
 		
 		book_panel = new books_view();
-
 		mainPanel.add(book_panel, "book_btn");
 		
 		reader_panel = new JPanel();

@@ -43,7 +43,7 @@ public class books_view extends JPanel {
 	public JButton add_btn;
 	public JButton del_btn;
 	public DefaultTableModel model;
-	String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
+	String column[]={"STT","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
 	private books_controller control;
 
 	/**
@@ -176,6 +176,7 @@ public class books_view extends JPanel {
 	}
 	public void loadTable(ArrayList<books> list) {
 		String rel_date;
+		int count = 1;
 		model = new DefaultTableModel(null,column);		
 		for (books book : list) {
 			try {
@@ -183,8 +184,9 @@ public class books_view extends JPanel {
 			} catch (Exception e) {
 				rel_date = "NULL";
 			}
-			model.addRow(new Object[] {book.getBook_id(),book.getName(),
+			model.addRow(new Object[] {count,book.getName(),
 					book.getAuthor(),rel_date,book.getQuantity(),book.getBrr_quantity()});
+			count++;
 		}
 		table.setModel(model);	
 	}

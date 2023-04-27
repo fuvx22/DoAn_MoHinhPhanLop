@@ -50,7 +50,7 @@ public class loan_book_view extends JPanel {
 	public JButton return_btn;
 	public JButton add_btn;
 	public DefaultTableModel model;
-	String column[]={"ID","Sách","Độc giả","Ngày mượn","Ngày trả","Số lượng"};
+	String column[]={"STT","Sách","Độc giả","Ngày mượn","Ngày trả","Số lượng"};
 	private loan_book_controller control;
 	public JButton renew_btn;
 
@@ -196,9 +196,11 @@ public class loan_book_view extends JPanel {
 	}
 	public void loadTable(ArrayList<loan_book> list) {
 		model = new DefaultTableModel(null,column);		
+		int count = 1;
 		for (loan_book row : list) {
-			model.addRow(new Object[] {row.getId() ,row.getBook_id(),row.getReader_id(),
+			model.addRow(new Object[] {count ,row.getBook_id(),row.getReader_id(),
 					row.getLoan_date(),row.getExp_date(),row.getQuantity()});
+			++count;
 		}
 		table.setModel(model);
 	}

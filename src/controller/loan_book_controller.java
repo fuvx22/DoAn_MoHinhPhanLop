@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
 
 import dao.DAOloan_book;
 import model.loan_book;
+import resource.converter;
 import view.home_view;
 import view.loan_book_view;
 
@@ -31,22 +32,40 @@ public class loan_book_controller implements ActionListener{
 	
 		if(e.getSource().equals(context.add_btn)) {
 			try {
-//				int bookID = Integer.valueOf(context.bookText.getText());
-//				int readerID = Integer.valueOf(context.readerText.getText());
-//				int quantity = Integer.valueOf(context.quanText.getText());
-				Date returnDate = context.dateText.getDate();
-				
+				int bookID = Integer.valueOf(context.bookText.getText());
+				int readerID = Integer.valueOf(context.readerText.getText());
+				int quantity = Integer.valueOf(context.quanText.getText());
+				Date expDate = context.dateText.getDate();
 				Date loanDate = new Date();
-				if(returnDate.compareTo(loanDate) < 0 ) {
-					System.out.println("1 > 2");
+				int libId = 1;
+				
+				if(expDate.compareTo(loanDate) < 0) {
+					home_view.warning("Ngày trả sách không hợp lệ!");
+					context.dateText.requestFocus();
+					return;
 				}
-				else {
-					System.out.println("2 > 1");
+				
+				loan_bookDTO = new loan_book(bookID, readerID, 
+					 	 quantity, converter.toSQLDate(loanDate),converter.toSQLDate(expDate), libId);
+					
+				if (!DAOloan_book.getInstance().insert(loan_bookDTO)) {
+					home_view.warning("mã sách hoặc độc giả không tồn tại!");
+					return;
 				}
+				
+				list.add(loan_bookDTO);
+				context.loadTable(list);
+				context.clearText();
+				
+				home_view.notify("Mượn sách thành công :)");
+				return;
 				
 			} catch (NumberFormatException e1) {
 				home_view.warning("Vui lòng không bỏ trống hoặc nhập sai định dạng!");
-			}
+			} catch (NullPointerException e2) {
+				context.dateText.requestFocus();
+				home_view.warning("Vui lòng không bỏ trống ngày trả sách");
+			} 
 		}
 		
 	}
