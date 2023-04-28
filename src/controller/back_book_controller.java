@@ -43,10 +43,9 @@ public class back_book_controller implements ActionListener{
 				
 				DAOback_book.getInstance().insert(DTO);
 				DAObooks.getInstance().updateBrrQuantity(bookID, -returnQuantity);
-				
-				context.loan_bookDTO.changeState();
+			
+				context.loan_bookDTO.setState("returned");
 				DAOloan_book.getInstance().update(context.loan_bookDTO);
-				System.out.println(context.loan_bookDTO.getId());
 				
 				context.dispose();
 				home_view.notify("Trả sách thành công");

@@ -10,7 +10,7 @@ public class loan_book {
 	private Date loan_date;
 	private Date exp_date;
 	private int lib_id;
-	private boolean state = true;
+	private String state;
 	
 	public loan_book(loan_book other) {
 		this.id = other.getId();
@@ -23,11 +23,11 @@ public class loan_book {
 		this.state = other.state;
 	}
 	
-	public boolean isState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(boolean state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -35,7 +35,7 @@ public class loan_book {
 		super();
 	}
 
-	public loan_book(int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id, boolean s) {
+	public loan_book(int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id, String s) {
 		super();
 		this.book_id = book_id;
 		this.reader_id = reader_id;
@@ -55,7 +55,7 @@ public class loan_book {
 		this.lib_id = lib_id;
 	}
 	
-	public loan_book(int id, int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id, boolean s) {
+	public loan_book(int id, int book_id, int reader_id, int quantity, Date loan_date, Date exp_date, int lib_id, String s) {
 		super();
 		this.id = id;
 		this.book_id = book_id;
@@ -122,11 +122,4 @@ public class loan_book {
 	public void setLib_id(int lib_id) {
 		this.lib_id = lib_id;
 	}
-
-	public void changeState() {
-		this.state = !this.state;
-	}
-	
-	
-	
 }

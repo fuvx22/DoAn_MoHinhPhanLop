@@ -24,8 +24,8 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 		try {
 			Connection con = JDBC_Util.getConnection();
 			
-			String sql = "INSERT INTO loan_book (book_id, reader_id, quantity, loan_date, exp_date, lib_id, state) "+
-						 "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO loan_book (book_id, reader_id, quantity, loan_date, exp_date, lib_id) "+
+						 "VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, t.getBook_id());
 			st.setInt(2, t.getReader_id());
@@ -33,8 +33,7 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 			st.setDate(4, t.getLoan_date());
 			st.setDate(5, t.getExp_date());
 			st.setInt(6, t.getLib_id());
-			st.setBoolean(7, t.isState());
-				
+
 			st.executeUpdate();
 					
 			JDBC_Util.closeConnection(con);
@@ -70,7 +69,7 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 			st.setInt(3, t.getQuantity());
 			st.setDate(4, t.getLoan_date());
 			st.setDate(5, t.getExp_date());
-			st.setBoolean(6, t.isState());
+			st.setString(6, t.getState());
 			st.setInt(7, t.getLib_id());
 			st.setInt(8, t.getId());
 			
@@ -133,7 +132,7 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 						rs.getDate("loan_date"),
 						rs.getDate("exp_date"),
 						rs.getInt("lib_id"),
-						rs.getBoolean("state"));
+						rs.getString("state"));
 			}
 				
 		} catch (SQLException e) {
@@ -166,7 +165,7 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 						rs.getDate("loan_date"),
 						rs.getDate("exp_date"),
 						rs.getInt("lib_id"),
-						rs.getBoolean("state"));
+						rs.getString("state"));
 				ketQua.add(b);
 			}
 			

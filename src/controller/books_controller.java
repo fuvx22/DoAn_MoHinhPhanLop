@@ -102,6 +102,12 @@ public class books_controller implements ActionListener{
 		
 		if(e.getSource().equals(context.refresh_btn)) {
 			context.loadTable(DAObooks.getInstance().getAll());
+			context.tableSearch("");
+		}
+		
+		if (e.getSource().equals(context.find_btn)) {
+			context.tableSearch(context.findText.getText());
+			context.findText.setText("");
 		}
 		
 	}

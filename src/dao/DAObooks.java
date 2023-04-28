@@ -166,6 +166,7 @@ public class DAObooks implements DAOInterface<books>{
 	
 	public boolean updateBrrQuantity(int id, int quantity) {
 		try {
+			
 			Connection con = JDBC_Util.getConnection();
 				
 			String sql = "UPDATE books "+

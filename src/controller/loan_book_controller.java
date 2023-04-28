@@ -67,7 +67,7 @@ public class loan_book_controller implements ActionListener{
 				}
 				
 				DAObooks.getInstance().updateBrrQuantity(bookID, Brrquantity);
-				list.add(loan_bookDTO);
+				list = DAOloan_book.getInstance().getAll();
 				context.loadTable(list);
 				context.clearText();
 				
@@ -89,6 +89,7 @@ public class loan_book_controller implements ActionListener{
 				return;
 			}
 			new back_book_view(loan_bookDTO);
+		
 		}
 		
 		
@@ -99,6 +100,8 @@ public class loan_book_controller implements ActionListener{
 			public void mouseClicked(MouseEvent e) {
 				selectRow = context.table.getSelectedRow();
 				loan_bookDTO = new loan_book(list.get(selectRow));
+				canReturnVerify();
+
 			}
 			
 			@Override
@@ -125,8 +128,15 @@ public class loan_book_controller implements ActionListener{
 				
 			}
 			
-		});
+		});	
+	}
+	public void canReturnVerify() {
 		
+		if (loan_bookDTO.getState().equals("returned")) {
+			context.return_btn.setEnabled(false);
+		} else {
+			context.return_btn.setEnabled(true);
+		}
 	}
 
 }

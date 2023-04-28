@@ -3,11 +3,13 @@ package view;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.books_controller;
 import model.books;
@@ -30,7 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class books_view extends JPanel {
-	public JTextField textField;
+	public JTextField findText;
 	public JTextField authorText;
 	public JTextField nameText;
 	public JTextField quanText;
@@ -124,12 +126,12 @@ public class books_view extends JPanel {
 		controlView.add(find_tab);
 		find_tab.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setBounds(0, 1, 446, 33);
-		textField.setPreferredSize(new Dimension(200, 22));
-		textField.setColumns(10);
-		find_tab.add(textField);
+		findText = new JTextField();
+		findText.setHorizontalAlignment(SwingConstants.LEFT);
+		findText.setBounds(0, 1, 446, 33);
+		findText.setPreferredSize(new Dimension(200, 22));
+		findText.setColumns(10);
+		find_tab.add(findText);
 		
 		find_btn = new JButton("Tìm kiếm");
 		find_btn.setBackground(new Color(247, 250, 124));
@@ -211,5 +213,16 @@ public class books_view extends JPanel {
 		this.quanText.setText(quantity+"");
 		this.authorText.setText(author);
 		this.dateText.setDate(date);
+	}
+	public void tableSearch(String text) {
+		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(sorter);
+		
+		if (text.trim().length() == 0) {
+			sorter.setRowFilter(null);
+		} else {
+			ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>();
+			sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+		}
 	}
 }
