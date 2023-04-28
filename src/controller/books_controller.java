@@ -21,8 +21,7 @@ import view.home_view;
 public class books_controller implements ActionListener{
 
 	books_view context;
-	ArrayList<books> book_list;
-	
+	ArrayList<books> book_list;		
 	private String book_name;
 	private String author;
 	private int quantity;
@@ -36,7 +35,6 @@ public class books_controller implements ActionListener{
 		context.loadTable(book_list);
 		initTableControl();
 	}
-	
 	public void actionPerformed(ActionEvent e) {
 		
 		
@@ -52,9 +50,8 @@ public class books_controller implements ActionListener{
 				
 				bookDTO = new books(book_name, author,Date.valueOf(rel_date), quantity);
 				DAObooks.getInstance().insert(bookDTO);
-				
-				book_list.add(bookDTO);
-				context.loadTable(book_list);
+				book_list.add(bookDTO);				
+				context.loadTable(DAObooks.getInstance().getAll());
 				context.clearText();
 				home_view.notify("Thêm sách thành công!");
 				
@@ -80,7 +77,7 @@ public class books_controller implements ActionListener{
 				else {
 					DAObooks.getInstance().update(bookDTO);
 					book_list.set(selectRow, bookDTO);
-					context.loadTable(book_list);
+					context.loadTable(DAObooks.getInstance().getAll());
 					context.clearText();
 					home_view.notify("Sửa đổi thông tin sách thành công!");
 				}
@@ -94,8 +91,6 @@ public class books_controller implements ActionListener{
 			if (selectRow != -1) {
 				bookDTO = new books();
 				bookDTO.setBook_id(book_list.get(selectRow).getBook_id());
-				bookDTO.setProperty(context.nameText.getText(), context.authorText.getText(),
-						Integer.valueOf(context.quanText.getText()), new Date(0));
 				DAObooks.getInstance().delete(bookDTO);
 				book_list.remove(selectRow);
 				context.loadTable(book_list);
@@ -103,6 +98,10 @@ public class books_controller implements ActionListener{
 				home_view.notify("Xóa sách thành công!");
 			}
 			return;
+		}
+		
+		if(e.getSource().equals(context.refresh_btn)) {
+			context.loadTable(DAObooks.getInstance().getAll());
 		}
 		
 	}
@@ -139,5 +138,6 @@ public class books_controller implements ActionListener{
 		});
 		
 	}
+	
 	
 }

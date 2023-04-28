@@ -106,7 +106,7 @@ public class DAOreaders implements DAOInterface<readers>{
 		
 		try {
 
-			String sql = "SELECT * FROM readers WHERE book_id =?";
+			String sql = "SELECT * FROM readers WHERE id=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			

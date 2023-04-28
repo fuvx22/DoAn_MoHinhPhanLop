@@ -57,7 +57,6 @@ public class DAObooks implements DAOInterface<books>{
 						 " ,author=?"+
 						 " ,release_date=?"+
 						 " ,quantity=?"+
-						 " ,borrow_quantity=?"+
 						 " WHERE book_id =?";	
 			
 			PreparedStatement st = con.prepareStatement(sql);
@@ -65,8 +64,7 @@ public class DAObooks implements DAOInterface<books>{
 			st.setString(2, t.getAuthor());
 			st.setDate(3, t.getRelease_date());
 			st.setInt(4, t.getQuantity());
-			st.setInt(5, t.getBrr_quantity());
-			st.setInt(6, t.getBook_id());
+			st.setInt(5, t.getBook_id());
 			
 			st.executeUpdate();
 			
@@ -121,7 +119,8 @@ public class DAObooks implements DAOInterface<books>{
 			
 			if (rs.next()) {
 				found = new books(rs.getInt("book_id"), rs.getString("book_name"),
-						rs.getString("author"), rs.getDate("release_date"), rs.getInt("quantity"));
+						rs.getString("author"), rs.getDate("release_date"), 
+						rs.getInt("quantity"), rs.getInt("borrow_quantity"));
 			}
 			
 			
@@ -149,7 +148,8 @@ public class DAObooks implements DAOInterface<books>{
 			
 			while (rs.next()) {
 				books b = new books(rs.getInt("book_id"), rs.getString("book_name"),
-						rs.getString("author"), rs.getDate("release_date"), rs.getInt("quantity"));
+						rs.getString("author"), rs.getDate("release_date"), rs.getInt("quantity"),
+						rs.getInt("borrow_quantity"));
 				ketQua.add(b);
 			}
 			
@@ -162,6 +162,30 @@ public class DAObooks implements DAOInterface<books>{
 		
 		return ketQua;
 		
+	}
+	
+	public boolean updateBrrQuantity(int id, int quantity) {
+		try {
+			Connection con = JDBC_Util.getConnection();
+				
+			String sql = "UPDATE books "+
+						 " SET "+
+						 " borrow_quantity= borrow_quantity + ?"+
+						 " WHERE book_id = ?";	
+			
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, quantity);
+			st.setInt(2, id);
+			
+			st.executeUpdate();
+			
+			JDBC_Util.closeConnection(con);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override

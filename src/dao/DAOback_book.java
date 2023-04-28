@@ -111,7 +111,7 @@ public class DAOback_book implements DAOInterface<back_book>{
 		
 		try {
 
-			String sql = "SELECT * FROM back_book WHERE book_id =?";
+			String sql = "SELECT * FROM back_book WHERE id =?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			

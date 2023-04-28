@@ -26,6 +26,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class books_view extends JPanel {
 	public JTextField textField;
@@ -43,8 +45,9 @@ public class books_view extends JPanel {
 	public JButton add_btn;
 	public JButton del_btn;
 	public DefaultTableModel model;
-	String column[]={"STT","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
+	String column[]={"ID","Tên sách","Tác giả","NXB","Số lượng","Số lượng đang mượn"};
 	private books_controller control;
+	public JButton refresh_btn;
 
 	/**
 	 * Create the panel.
@@ -106,6 +109,14 @@ public class books_view extends JPanel {
 		dateText = new JDateChooser();
 		dateText.setBounds(545, 41, 218, 24);
 		input_tab.add(dateText);
+		
+		refresh_btn = new JButton("làm mới");
+		refresh_btn.setPreferredSize(new Dimension(100, 30));
+		refresh_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		refresh_btn.setBounds(new Rectangle(220, 5, 90, 20));
+		refresh_btn.setBackground(new Color(247, 250, 124));
+		refresh_btn.setBounds(829, 41, 76, 26);
+		input_tab.add(refresh_btn);
 		
 		JPanel find_tab = new JPanel();
 		find_tab.setOpaque(false);
@@ -172,11 +183,11 @@ public class books_view extends JPanel {
 		del_btn.addActionListener(control);
 		edit_btn.addActionListener(control);
 		find_btn.addActionListener(control);
+		refresh_btn.addActionListener(control);
 		
 	}
 	public void loadTable(ArrayList<books> list) {
 		String rel_date;
-		int count = 1;
 		model = new DefaultTableModel(null,column);		
 		for (books book : list) {
 			try {
@@ -184,9 +195,8 @@ public class books_view extends JPanel {
 			} catch (Exception e) {
 				rel_date = "NULL";
 			}
-			model.addRow(new Object[] {count,book.getName(),
+			model.addRow(new Object[] {book.getBook_id(),book.getName(),
 					book.getAuthor(),rel_date,book.getQuantity(),book.getBrr_quantity()});
-			count++;
 		}
 		table.setModel(model);	
 	}

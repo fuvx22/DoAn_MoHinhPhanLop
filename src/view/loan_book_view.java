@@ -50,7 +50,7 @@ public class loan_book_view extends JPanel {
 	public JButton return_btn;
 	public JButton add_btn;
 	public DefaultTableModel model;
-	String column[]={"STT","Sách","Độc giả","Ngày mượn","Ngày trả","Số lượng"};
+	String column[]={"STT","Sách","Độc giả","Ngày mượn","Hạn trả","Số lượng"};
 	private loan_book_controller control;
 	public JButton renew_btn;
 
@@ -96,7 +96,7 @@ public class loan_book_view extends JPanel {
 		lblNewLabel_2.setBounds(396, 18, 89, 13);
 		input_tab.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Ngày trả");
+		JLabel lblNewLabel_2_1 = new JLabel("Hạn trả");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2_1.setBounds(396, 41, 89, 26);
 		input_tab.add(lblNewLabel_2_1);
@@ -116,11 +116,23 @@ public class loan_book_view extends JPanel {
 		input_tab.add(dateText);
 		
 		add_btn = new JButton("Mượn sách");
-		add_btn.setBounds(736, 36, 125, 33);
+		add_btn.setBounds(733, 12, 138, 35);
 		input_tab.add(add_btn);
 		add_btn.setBackground(new Color(247, 250, 124));
 		add_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add_btn.setPreferredSize(new Dimension(100, 30));
+		
+		JButton clear_btn = new JButton("Clear");
+		clear_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearText();
+			}
+		});
+		clear_btn.setPreferredSize(new Dimension(100, 30));
+		clear_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		clear_btn.setBackground(new Color(247, 250, 124));
+		clear_btn.setBounds(758, 57, 89, 26);
+		input_tab.add(clear_btn);
 		
 		JPanel find_tab = new JPanel();
 		find_tab.setOpaque(false);
@@ -175,8 +187,7 @@ public class loan_book_view extends JPanel {
 		 
 		
 		table = new JTable();
-		table.setBackground(new Color(208, 253, 218));
-		
+		table.setBackground(new Color(208, 253, 218));	
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.getViewport().setBackground(primaryColor);	

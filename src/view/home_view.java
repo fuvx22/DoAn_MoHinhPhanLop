@@ -80,18 +80,15 @@ public class home_view extends JFrame {
 		JPanel sideMenu = new JPanel();
 		sideMenu.setPreferredSize(new Dimension(150, 10));
 		sideMenu.setBackground(new Color(50, 201, 96));
-		contentPane.add(sideMenu, BorderLayout.WEST);
-		
+		contentPane.add(sideMenu, BorderLayout.WEST);		
 		sideMenu.setLayout(null);
-		
-		
-		
+	
 		JLabel book_btn = new JLabel("Quản lý sách");
 		book_btn.setPreferredSize(new Dimension(150, 0));
 		book_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		book_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		book_btn.setForeground(new Color(255, 255, 255));
-		book_btn.setBounds(0, 57, 150, 35);
+		book_btn.setBounds(0, 60, 150, 35);
 		book_btn.setName("book_btn");
 		sideMenu.add(book_btn);
 		
@@ -100,7 +97,7 @@ public class home_view extends JFrame {
 		reader_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		reader_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		reader_btn.setForeground(new Color(255, 255, 255));
-		reader_btn.setBounds(0, 103, 150, 35);
+		reader_btn.setBounds(0, 130, 150, 35);
 		reader_btn.setName("reader_btn");
 		sideMenu.add(reader_btn);
 		
@@ -109,7 +106,7 @@ public class home_view extends JFrame {
 		loan_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		loan_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		loan_btn.setForeground(new Color(255, 255, 255));
-		loan_btn.setBounds(0, 149, 150, 35);
+		loan_btn.setBounds(0, 95, 150, 35);
 		loan_btn.setName("loan_btn");
 		sideMenu.add(loan_btn);
 		
@@ -118,7 +115,7 @@ public class home_view extends JFrame {
 		stat_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		stat_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		stat_btn.setForeground(new Color(255, 255, 255));
-		stat_btn.setBounds(0, 194, 150, 35);
+		stat_btn.setBounds(0, 165, 150, 35);
 		stat_btn.setName("stat_btn");
 		sideMenu.add(stat_btn);
 		
@@ -136,7 +133,7 @@ public class home_view extends JFrame {
 		lib_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		lib_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lib_btn.setForeground(new Color(255, 255, 255));
-		lib_btn.setBounds(0, 569, 150, 35);
+		lib_btn.setBounds(0, 580, 150, 35);
 		lib_btn.setName("lib_btn");
 		sideMenu.add(lib_btn);
 		
@@ -190,7 +187,7 @@ public class home_view extends JFrame {
 		source.setBackground(new Color(50, 201, 96));
 	}
 	public static void warning(String message) {
-		JOptionPane.showMessageDialog(null,message,"thông báo",
+		JOptionPane.showMessageDialog(null,message,"LƯU Ý!!!",
 		        JOptionPane.WARNING_MESSAGE);
 	}
 	public static void notify(String message) {

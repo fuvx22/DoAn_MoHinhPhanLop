@@ -61,7 +61,8 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 						 " ,quantity=?"+
 						 " ,loan_date=?"+
 						 " ,exp_date=?"+
-						 " ,lib_id=";	
+						 " ,state=?"+
+						 " ,lib_id=? WHERE id =?";	
 			
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, t.getBook_id());
@@ -69,7 +70,9 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 			st.setInt(3, t.getQuantity());
 			st.setDate(4, t.getLoan_date());
 			st.setDate(5, t.getExp_date());
-			st.setInt(6, t.getLib_id());
+			st.setBoolean(6, t.isState());
+			st.setInt(7, t.getLib_id());
+			st.setInt(8, t.getId());
 			
 			st.executeUpdate();
 			
@@ -116,7 +119,7 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 		
 		try {
 
-			String sql = "SELECT * FROM loan_book WHERE book_id =?";
+			String sql = "SELECT * FROM loan_book WHERE  id=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			

@@ -13,6 +13,7 @@ public class loan_book {
 	private boolean state = true;
 	
 	public loan_book(loan_book other) {
+		this.id = other.getId();
 		this.book_id = other.book_id;
 		this.reader_id = other.reader_id;
 		this.quantity = other.quantity;
@@ -120,6 +121,10 @@ public class loan_book {
 
 	public void setLib_id(int lib_id) {
 		this.lib_id = lib_id;
+	}
+
+	public void changeState() {
+		this.state = !this.state;
 	}
 	
 	
