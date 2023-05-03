@@ -3,16 +3,21 @@ package view;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.books_controller;
 import controller.loan_book_controller;
+import dao.DAObooks;
+import dao.DAOreaders;
 import model.books;
 import model.loan_book;
+import model.readers;
 
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -53,6 +58,8 @@ public class loan_book_view extends JPanel {
 	String column[]={"STT","Sách","Độc giả","Ngày mượn","Hạn trả","Số lượng","Trạng thái"};
 	private loan_book_controller control;
 	public JButton renew_btn;
+	public JButton refresh_btn;
+	public JComboBox showOption;
 
 	/**
 	 * Create the panel.
@@ -131,8 +138,15 @@ public class loan_book_view extends JPanel {
 		clear_btn.setPreferredSize(new Dimension(100, 30));
 		clear_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		clear_btn.setBackground(new Color(247, 250, 124));
-		clear_btn.setBounds(758, 57, 89, 26);
+		clear_btn.setBounds(700, 57, 90, 26);
 		input_tab.add(clear_btn);
+		
+		refresh_btn = new JButton("Làm mới");
+		refresh_btn.setPreferredSize(new Dimension(100, 30));
+		refresh_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		refresh_btn.setBackground(new Color(247, 250, 124));
+		refresh_btn.setBounds(800, 57, 90, 26);
+		input_tab.add(refresh_btn);
 		
 		JPanel find_tab = new JPanel();
 		find_tab.setOpaque(false);
@@ -155,8 +169,8 @@ public class loan_book_view extends JPanel {
 		find_btn.setBounds(new Rectangle(283, 0, 90, 33));
 		find_tab.add(find_btn);
 		
-		JComboBox showOption = new JComboBox();
-		showOption.setBounds(388, 1, 202, 33);
+		showOption = new JComboBox();
+		showOption.setBounds(388, 1, 200, 30);
 		find_tab.add(showOption);
 		showOption.setEditable(true);
 		
@@ -198,6 +212,7 @@ public class loan_book_view extends JPanel {
 		return_btn.addActionListener(control);
 		renew_btn.addActionListener(control);
 		find_btn.addActionListener(control);
+		refresh_btn.addActionListener(control);
 	}
 	public void clearText() {
 		this.bookText.setText("");
@@ -206,13 +221,31 @@ public class loan_book_view extends JPanel {
 		this.dateText.setDate(null);
 	}
 	public void loadTable(ArrayList<loan_book> list) {
-		model = new DefaultTableModel(null,column);		
+		model = new DefaultTableModel(null,column) {
+			@Override
+		    public boolean isCellEditable(int i, int i1) {
+		        return false; 
+		    }
+		};		
 		int count = 1;
 		for (loan_book row : list) {
-			model.addRow(new Object[] {count ,row.getBook_id(),row.getReader_id(),
+			String book = DAObooks.getInstance().selectById(row.getBook_id()).getName();
+			String reader = DAOreaders.getInstance().selectById(row.getReader_id()).getName();
+			model.addRow(new Object[] {count ,book,reader,
 					row.getLoan_date(),row.getExp_date(),row.getQuantity(), row.getState()});
 			++count;
 		}
 		table.setModel(model);
+	}
+	public void tableSearch(String text) {
+		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(sorter);
+		
+		if (text.trim().length() == 0) {
+			sorter.setRowFilter(null);
+		} else {
+			ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>();
+			sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+		}
 	}
 }

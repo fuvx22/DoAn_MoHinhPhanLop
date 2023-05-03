@@ -190,7 +190,13 @@ public class books_view extends JPanel {
 	}
 	public void loadTable(ArrayList<books> list) {
 		String rel_date;
-		model = new DefaultTableModel(null,column);		
+		model = new DefaultTableModel(null,column){
+		    @Override
+		    public boolean isCellEditable(int i, int i1) {
+		        return false; 
+		    }
+
+		};		
 		for (books book : list) {
 			try {
 				rel_date = new SimpleDateFormat("dd/MM/yyyy").format(book.getRelease_date());

@@ -113,9 +113,10 @@ public class books_controller implements ActionListener{
 	}
 	private void initTableControl() {
 		context.table.addMouseListener(new MouseListener() {	
-		
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				selectRow = context.table.getSelectedRow();
 				books selectBook =  book_list.get(selectRow);
 				context.setText(selectBook.getName(), selectBook.getQuantity(),

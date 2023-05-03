@@ -43,7 +43,6 @@ public class back_book_view extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 290, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(185, 255, 207));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
