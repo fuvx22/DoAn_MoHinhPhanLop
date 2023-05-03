@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/model/librarian.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/DoAn_MoHinhPhanLop-master_Moi/src/model/librarian.java</locationURI>
+		</link>
+		<link>
+			<name>src/model/readers.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/DoAn_MoHinhPhanLop-master_Moi/src/model/readers.java</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

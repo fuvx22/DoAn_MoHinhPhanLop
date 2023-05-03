@@ -148,20 +148,17 @@ public class home_view extends JFrame {
 		book_panel = new books_view();
 		mainPanel.add(book_panel, "book_btn");
 		
-		reader_panel = new JPanel();
-		reader_panel.setBackground(new Color(0, 255, 0));
+		reader_panel = new readers_view();
 		mainPanel.add(reader_panel, "reader_btn");
 		
 		loan_panel = new loan_book_view();
-		loan_panel.setBackground(new Color(0, 128, 0));
 		mainPanel.add(loan_panel, "loan_btn");
 		
 		stat_panel = new JPanel();
 		stat_panel.setBackground(new Color(128, 128, 64));
 		mainPanel.add(stat_panel, "stat_btn");
 		
-		lib_panel = new JPanel();
-		lib_panel.setBackground(new Color(0, 128, 128));
+		lib_panel = new librarians_view();
 		mainPanel.add(lib_panel, "lib_btn");
 		
 		homeView_controller control = new homeView_controller(this);

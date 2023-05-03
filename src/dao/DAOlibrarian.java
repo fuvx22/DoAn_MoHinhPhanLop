@@ -56,13 +56,15 @@ public class DAOlibrarian implements DAOInterface<librarian>{
 						 " name=?"+
 						 " ,address=?"+
 						 " ,log_name=?"+
-						 " ,log_pw=?";	
+						 " ,log_pw=?"+
+						 " WHERE id = ?";	
 			
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, t.getName());
 			st.setString(2, t.getAddress());
 			st.setString(3, t.getLogin_name());
 			st.setString(4, t.getLogin_pw());
+			st.setInt(5, t.getId());
 			
 			st.executeUpdate();
 			
