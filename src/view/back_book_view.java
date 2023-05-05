@@ -24,7 +24,7 @@ import model.books;
 import model.loan_book;
 import model.readers;
 
-public class back_book_view extends JFrame {
+public class back_book_view extends JFrame{
 
 	public JPanel contentPane;
 	public JButton return_btn;

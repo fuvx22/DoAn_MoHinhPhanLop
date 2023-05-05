@@ -51,7 +51,7 @@ public class loan_book_controller implements ActionListener{
 				int Brrquantity = Integer.valueOf(context.quanText.getText());
 				Date expDate = context.dateText.getDate();
 				Date loanDate = new Date();
-				int libId = 1;
+				int libId = login_controller.currentUser.getId();
 				
 				if(expDate.compareTo(loanDate) < 0) {
 					home_view.warning("Hạn trả sách không hợp lệ!");
@@ -100,7 +100,7 @@ public class loan_book_controller implements ActionListener{
 				return;
 			}
 			new back_book_view(loan_bookDTO).setLocationRelativeTo(context);
-		
+			
 		}
 		
 //		Xử lý gia hạn phiếu mượn
@@ -117,7 +117,8 @@ public class loan_book_controller implements ActionListener{
 		}
 		
 		if(e.getSource().equals(context.refresh_btn)) {
-			context.loadTable(DAOloan_book.getInstance().getAll());
+			list = DAOloan_book.getInstance().getAll();
+			context.loadTable(list);
 			context.tableSearch("");
 		}
 		
@@ -193,7 +194,6 @@ public class loan_book_controller implements ActionListener{
 		
 	}
 	public void canReturnAndRenewVerify() {
-		
 		if (loan_bookDTO.getState().equals("returned") || loan_bookDTO.getState().equals("overdue")) {
 			context.return_btn.setEnabled(false);
 			context.renew_btn.setEnabled(false);

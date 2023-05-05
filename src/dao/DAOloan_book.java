@@ -49,6 +49,11 @@ public class DAOloan_book implements DAOInterface<loan_book>{
 	
 	@Override
 	public boolean update(loan_book t) {
+			
+			if (t.getLib_id() == 0) {
+				t.setLib_id(DAOlibrarian.getInstance().getAll().get(0).getId());
+			}
+			
 		try {
 			Connection con = JDBC_Util.getConnection();
 			

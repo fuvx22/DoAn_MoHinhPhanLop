@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.homeView_controller;
+import controller.login_controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import java.awt.Rectangle;
 import java.awt.Transparency;
+import javax.swing.ImageIcon;
 
 public class home_view extends JFrame {
 
@@ -44,24 +46,8 @@ public class home_view extends JFrame {
 	private JPanel stat_panel;
 	private JPanel lib_panel;
 	private CardLayout card;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					home_view frame = new home_view();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JLabel userName;
+	public JLabel logout_btn;
 
 	/**
 	 * Create the frame.
@@ -119,7 +105,7 @@ public class home_view extends JFrame {
 		stat_btn.setName("stat_btn");
 		sideMenu.add(stat_btn);
 		
-		JLabel logout_btn = new JLabel("Đăng xuất");
+		logout_btn = new JLabel("Đăng xuất");
 		logout_btn.setPreferredSize(new Dimension(150, 0));
 		logout_btn.setHorizontalAlignment(SwingConstants.LEFT);
 		logout_btn.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -136,6 +122,19 @@ public class home_view extends JFrame {
 		lib_btn.setBounds(0, 580, 150, 35);
 		lib_btn.setName("lib_btn");
 		sideMenu.add(lib_btn);
+		
+		userName = new JLabel();
+		userName.setOpaque(true);
+		userName.setBackground(new Color(255, 255, 85));
+		userName.setIcon(new ImageIcon(home_view.class.getResource("/resource/user_icon.png")));
+		userName.setPreferredSize(new Dimension(150, 0));
+		userName.setName("book_btn");
+		userName.setHorizontalAlignment(SwingConstants.CENTER);
+		userName.setForeground(new Color(0, 0, 0));
+		userName.setFont(new Font("Tahoma", Font.BOLD, 12));
+		userName.setBounds(0, 14, 150, 35);
+		sideMenu.add(userName);
+		userName.setText(login_controller.currentUser.getName());
 		
 		
 		mainPanel = new JPanel();
@@ -154,8 +153,7 @@ public class home_view extends JFrame {
 		loan_panel = new loan_book_view();
 		mainPanel.add(loan_panel, "loan_btn");
 		
-		stat_panel = new JPanel();
-		stat_panel.setBackground(new Color(128, 128, 64));
+		stat_panel = new stat_view();
 		mainPanel.add(stat_panel, "stat_btn");
 		
 		lib_panel = new librarians_view();

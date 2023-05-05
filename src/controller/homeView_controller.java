@@ -6,8 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
+import test.test;
 import view.home_view;
+import view.login_view;
 
 public class homeView_controller implements MouseListener{
 	
@@ -19,8 +22,20 @@ public class homeView_controller implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		view.changePanel(e.getComponent().getName());
-		
+	view.changePanel(e.getComponent().getName());
+	
+	if (e.getSource().equals(view.logout_btn)) {
+			
+			int dialogResult = JOptionPane.showConfirmDialog 
+					(view, "Bạn muốn đăng xuất?","Cảnh báo",JOptionPane.YES_NO_OPTION);
+			
+			if(dialogResult == 0){
+				view.dispose();
+				test.rerun();
+			} else {
+				return;
+			}
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

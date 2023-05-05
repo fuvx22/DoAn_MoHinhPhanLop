@@ -31,7 +31,7 @@ public class back_book_controller implements ActionListener{
 				int readerID = context.loan_bookDTO.getReader_id();
 				int brQuantity = context.loan_bookDTO.getQuantity();
 				int returnQuantity = Integer.valueOf(context.quantityText.getText());
-				int libID = 1;
+				int libID = login_controller.currentUser.getId();
 				
 				if (brQuantity != returnQuantity) {
 					home_view.warning("Số lượng trả phải bằng số lượng mượn!");
